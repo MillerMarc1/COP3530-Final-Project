@@ -26,6 +26,13 @@ public:
 
 };
 
+class comparator{
+public:
+    bool operator()(const Business& var1, const Business& var2){
+        return var1.rating < var2.rating;
+    }
+};
+
 int main() {
 
     ifstream file;
@@ -115,12 +122,13 @@ int main() {
         entries++;
 
     }
+
     cout << "What city are you in?" << endl;
     string input;
     getline(cin,input);
     cout << "What business type are you looking for" << endl;
     string business;
-    cin >> business;
+    getline(cin,business);
     cout<<"What is the minimum star rating you are looking for?"<<endl;
     string rating;
     cin>>rating;
@@ -147,23 +155,25 @@ int main() {
     cout << endl << endl;
     cout << "Data Structure: Priority Queue" << endl;
 
-    priority_queue <pair<int,string>> pq;
+    priority_queue <Business, vector<Business>, comparator> pq;
     for (int i = 0; i < allBusinesses.size(); i++) {
         if (allBusinesses[i].city == input && allBusinesses[i].rating>=realRating) {
             for(int j=0;j<allBusinesses[i].categories.size();j++){
                 if(allBusinesses[i].categories[j]==business){
                     string businessName = allBusinesses[i].name;
                     int businessRating = allBusinesses[i].rating;
-                    pq.push(make_pair(businessRating,businessName));
+                    pq.push(allBusinesses[i]);
                 }
             }
         }
     }
 
+
     while (pq.empty() == false){
-        cout << pq.top().second << ": " << pq.top().first << endl;
+        cout << pq.top().name << ": " << pq.top().rating <<  endl;
         pq.pop();
     }
+
 
 
 }

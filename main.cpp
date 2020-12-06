@@ -30,7 +30,7 @@ public:
 class comparator{
 public:
     bool operator()(const Business& var1, const Business& var2){
-        return var1.rating < var2.rating;
+        return var1.name > var2.name;
     }
 };
 
@@ -158,46 +158,274 @@ int main() {
         }
         auto stop = std::chrono::high_resolution_clock::now();
 
-        if(graph.begin()==graph.end()){
-            cout<< "No results found. Please try again."<< endl;
-        }
-        else{
-            auto time = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
-            cout << "Data Structure: Map" << endl;
-            cout << "Time taken: " << time << " microseconds." << endl;
-        }
-
-        for(auto it =graph.begin();it!=graph.end();++it) {
-
-            string stars;
-            string blankStars;
-            if(it->second.rating==1){
-                stars = "★";
-                blankStars= "☆☆☆☆";
+        vector<Business> myVect5;
+        vector<Business> myVect4;
+        vector<Business> myVect3;
+        vector<Business> myVect2;
+        vector<Business> myVect1;
+        int numBus=25;
+        for(auto it= graph.begin();it!=graph.end() ;++it){
+            if(it->second.rating==5){
+                myVect5.push_back(it->second);
+            }
+            else if(it->second.rating==4){
+                myVect4.push_back(it->second);
+            }
+            else if(it->second.rating==3){
+                myVect3.push_back(it->second);
             }
             else if(it->second.rating==2){
-                stars = "★★";
-                blankStars = "☆☆☆";
+                myVect2.push_back(it->second);
             }
-            if(it->second.rating==3){
-                stars = "★★★";
-                blankStars = "☆☆";
+            else if(it->second.rating==1){
+                myVect1.push_back(it->second);
             }
-            if(it->second.rating==4){
-                stars = "★★★★";
-                blankStars= "☆";
-            }
-            if(it->second.rating==5){
-                stars = "★★★★★";
-                blankStars="";
-            }
+        }
+        map<int, Business> myGraph;
+        if (myVect5.empty() == false) {
+            std::sort(myVect5.begin(),
+                      myVect5.end(),
+                      [](const Business &lhs, const Business &rhs) {
+                          return lhs.reviewCount > rhs.reviewCount;
+                      }
+            );
 
-            cout<< "Name: " << it->first << endl;
-            cout<<"Rating: "<<stars +blankStars<< endl;
-            cout<<"Number of Reviews: "<<it->second.rating << endl;
-            cout << " " << endl;
 
         }
+
+        if (myVect4.empty() == false) {
+            std::sort(myVect4.begin(), myVect4.end(), [](const Business &lhs, const Business &rhs) {
+                return lhs.reviewCount > rhs.reviewCount;
+            });
+
+        }
+
+        if (myVect3.empty() == false) {
+            std::sort(myVect3.begin(),
+                      myVect3.end(),
+                      [](const Business &lhs, const Business &rhs) {
+                          return lhs.reviewCount > rhs.reviewCount;
+                      }
+            );
+
+        }
+
+        if (myVect2.empty() == false) {
+            std::sort(myVect2.begin(),
+                      myVect2.end(),
+                      [](const Business &lhs, const Business &rhs) {
+                          return lhs.reviewCount > rhs.reviewCount;
+                      }
+            );
+
+        }
+
+        if (myVect1.empty() == false) {
+            std::sort(myVect1.begin(),
+                      myVect1.end(),
+                      [](const Business &lhs, const Business &rhs) {
+                          return lhs.reviewCount > rhs.reviewCount;
+                      }
+            );
+
+        }
+        if(myVect5.size()==0&&myVect4.size()==0&&myVect3.size()==0&&myVect2.size()==0&&myVect1.size()==0){
+            cout<< "No results found. Please try again."<< endl;
+        }
+        else {
+            cout << "Data Structure: Map" << endl;
+            auto time = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
+            cout << "Time taken: " << time << " microseconds." << endl;
+        }
+        int j =0;
+        int k=0;
+        int l = 0;
+        int m=0;
+        int n=0;
+
+        for (int i = 0; i < numBus; i++) {
+
+
+            if (j<myVect5.size()) {
+                cout << "Name: " << myVect5[j].name << endl;
+
+                string stars;
+                string blankStars;
+                if (myVect5[j].rating == 1) {
+                    stars = "★";
+                    blankStars = "☆☆☆☆";
+                } else if (myVect5[j].rating == 2) {
+                    stars = "★★";
+                    blankStars = "☆☆☆";
+                }
+                if (myVect5[j].rating == 3) {
+                    stars = "★★★";
+                    blankStars = "☆☆";
+                }
+                if (myVect5[j].rating == 4) {
+                    stars = "★★★★";
+                    blankStars = "☆";
+                }
+                if (myVect5[j].rating == 5) {
+                    stars = "★★★★★";
+                    blankStars = "";
+                }
+                cout << "Rating: " << stars << blankStars << endl;
+                cout << "Number of Reviews: " << myVect5[j].reviewCount << endl;
+                cout << " " << endl;
+                j++;
+            } else if (k<myVect4.size()) {
+                cout << "Name: " << myVect4[k].name << endl;
+
+                string stars;
+                string blankStars;
+                if (myVect4[k].rating == 1) {
+                    stars = "★";
+                    blankStars = "☆☆☆☆";
+                } else if (myVect4[k].rating == 2) {
+                    stars = "★★";
+                    blankStars = "☆☆☆";
+                }
+                if (myVect4[k].rating == 3) {
+                    stars = "★★★";
+                    blankStars = "☆☆";
+                }
+                if (myVect4[k].rating == 4) {
+                    stars = "★★★★";
+                    blankStars = "☆";
+                }
+                if (myVect4[k].rating == 5) {
+                    stars = "★★★★★";
+                    blankStars = "";
+                }
+
+                cout << "Rating: " << stars << blankStars << endl;
+                cout << "Number of Reviews: " << myVect4[k].reviewCount << endl;
+                cout << " " << endl;
+                k++;
+            } else if (l<myVect3.size()) {
+                cout << "Name: " << myVect3[l].name << endl;
+
+                string stars;
+                string blankStars;
+                if (myVect3[l].rating == 1) {
+                    stars = "★";
+                    blankStars = "☆☆☆☆";
+                } else if (myVect3[l].rating == 2) {
+                    stars = "★★";
+                    blankStars = "☆☆☆";
+                }
+                if (myVect3[l].rating == 3) {
+                    stars = "★★★";
+                    blankStars = "☆☆";
+                }
+                if (myVect3[l].rating == 4) {
+                    stars = "★★★★";
+                    blankStars = "☆";
+                }
+                if (myVect3[l].rating == 5) {
+                    stars = "★★★★★";
+                    blankStars = "";
+                }
+                cout << "Rating: " << stars << blankStars << endl;
+                cout << "Number of Reviews: " << myVect3[l].reviewCount << endl;
+                cout << " " << endl;
+                l++;
+            } else if (m<myVect2.size()) {
+                cout << "Name: " <<myVect2[m].name << endl;
+
+                string stars;
+                string blankStars;
+                if (myVect2[m].rating == 1) {
+                    stars = "★";
+                    blankStars = "☆☆☆☆";
+                } else if (myVect2[m].rating == 2) {
+                    stars = "★★";
+                    blankStars = "☆☆☆";
+                }
+                if (myVect2[m].rating == 3) {
+                    stars = "★★★";
+                    blankStars = "☆☆";
+                }
+                if (myVect2[m].rating == 4) {
+                    stars = "★★★★";
+                    blankStars = "☆";
+                }
+                if (myVect2[m].rating == 5) {
+                    stars = "★★★★★";
+                    blankStars = "";
+                }
+                cout << "Rating: " << stars << blankStars << endl;
+                //cout << "Rating: " << vect2[m].rating << endl;
+                cout << "Number of Reviews: " << myVect2[m].reviewCount << endl;
+                cout << " " << endl;
+                m++;
+            } else if (n<myVect1.size()) {
+                cout << "Name: " << myVect1[n].name << endl;
+
+                string stars;
+                string blankStars;
+                if (myVect1[n].rating == 1) {
+                    stars = "★";
+                    blankStars = "☆☆☆☆";
+                } else if (myVect1[n].rating == 2) {
+                    stars = "★★";
+                    blankStars = "☆☆☆";
+                }
+                if (myVect1[n].rating == 3) {
+                    stars = "★★★";
+                    blankStars = "☆☆";
+                }
+                if (myVect1[n].rating == 4) {
+                    stars = "★★★★";
+                    blankStars = "☆";
+                }
+                if (myVect1[n].rating == 5) {
+                    stars = "★★★★★";
+                    blankStars = "";
+                }
+                cout << "Rating: " << stars << blankStars << endl;
+
+                // cout << "Rating: " << vect1[n].rating << endl;
+                cout << "Number of Reviews: " << myVect1[n].reviewCount << endl;
+                cout << " " << endl;
+                n++;
+            }
+
+        }
+
+
+
+
+        /*     for(auto it =myGraph.begin();it!=myGraph.end();++it) {
+                 string stars;
+                 string blankStars;
+                 if(it->second.rating==1){
+                     stars = "★";
+                     blankStars= "☆☆☆☆";
+                 }
+                 else if(it->second.rating==2){
+                     stars = "★★";
+                     blankStars = "☆☆☆";
+                 }
+                 if(it->second.rating==3){
+                     stars = "★★★";
+                     blankStars = "☆☆";
+                 }
+                 if(it->second.rating==4){
+                     stars = "★★★★";
+                     blankStars= "☆";
+                 }
+                 if(it->second.rating==5){
+                     stars = "★★★★★";
+                     blankStars="";
+                 }
+                 cout<< "Name: " << it->second.name << endl;
+                 cout<<"Rating: "<<stars +blankStars<< endl;
+                 cout<<"Number of Reviews: "<<it->second.rating << endl;
+                 cout << " " << endl;
+             }
+             */
 
 
         cout << endl << endl;
@@ -209,8 +437,6 @@ int main() {
             if (allBusinesses[i].city == input && allBusinesses[i].rating>=realRating) {
                 for(int j=0;j<allBusinesses[i].categories.size();j++){
                     if(allBusinesses[i].categories[j]==business){
-                        string businessName = allBusinesses[i].name;
-                        int businessRating = allBusinesses[i].rating;
                         /*   if(allBusinesses[i].rating==5){
                                vect5.push_back(allBusinesses[i]);
                            }
@@ -235,7 +461,7 @@ int main() {
             auto time = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
             cout << "Time taken: " << time << " microseconds." << endl;
 
-            while (pq.empty() == false && numberOfBusinesses<25) {
+            while (pq.empty() == false /*&& numberOfBusinesses<25*/) {
 /*        string stars;
         string blankStars;
         if (pq.top().rating == 1) {
@@ -321,11 +547,11 @@ int main() {
             );
         }
 
-        int j =0;
-        int k=0;
-        int l = 0;
-        int m=0;
-        int n=0;
+        j =0;
+        k=0;
+        l = 0;
+        m=0;
+        n=0;
 
         for (int i = 0; i < numberOfBusinesses; i++) {
 

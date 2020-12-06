@@ -117,7 +117,7 @@ int main() {
     }
     cout << "What city are you in?" << endl;
     string input;
-    cin >> input;
+    getline(cin,input);
     cout << "What business type are you looking for" << endl;
     string business;
     cin >> business;

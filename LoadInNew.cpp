@@ -197,6 +197,8 @@ count++;
 
         cout << endl << endl;
 
+        vector<Business> vect5;
+        vector<Business> vect4;
 
         priority_queue <Business, vector<Business>, comparator> pq;
         for (int i = 0; i < allBusinesses.size(); i++) {
@@ -205,47 +207,86 @@ count++;
                     if(allBusinesses[i].categories[j]==business){
                         string businessName = allBusinesses[i].name;
                         int businessRating = allBusinesses[i].rating;
+                        if(allBusinesses[i].rating==5){
+                            vect5.push_back(allBusinesses[i]);
+                        }
+                        if(allBusinesses[i].rating==4){
+                            vect4.push_back(allBusinesses[i]);
+                        }
                         pq.push(allBusinesses[i]);
                     }
                 }
             }
         }
 
-if(pq.empty()!=true){
+if(pq.empty()!=true) {
     cout << "Data Structure: Priority Queue" << endl;
-}
-     while (pq.empty() == false){
-         string stars;
-         string blankStars;
-         if(pq.top().rating==1){
-             stars = "★";
-             blankStars= "☆☆☆☆";
-         }
-         else if(pq.top().rating==2){
-             stars = "★★";
-             blankStars= "☆☆☆";
-         }
-         if(pq.top().rating==3){
-             stars = "★★★";
-             blankStars="☆☆";
-         }
-         if(pq.top().rating==4){
-             stars = "★★★★";
-             blankStars="☆";
-         }
-         if(pq.top().rating==5){
-             stars = "★★★★★";
-             blankStars="";
-         }
 
-         cout<<"Name: "<< pq.top().name << endl;
-         cout<<"Rating: "<< stars + blankStars << endl;
-         cout<<"Number of Reviews: "<<pq.top().reviewCount << endl;
-         cout << " " << endl;
+    //  while (pq.empty() == false){
+    string stars;
+    string blankStars;
+    if (pq.top().rating == 1) {
+        stars = "★";
+        blankStars = "☆☆☆☆";
+    } else if (pq.top().rating == 2) {
+        stars = "★★";
+        blankStars = "☆☆☆";
+    }
+    if (pq.top().rating == 3) {
+        stars = "★★★";
+        blankStars = "☆☆";
+    }
+    if (pq.top().rating == 4) {
+        stars = "★★★★";
+        blankStars = "☆";
+    }
+    if (pq.top().rating == 5) {
+        stars = "★★★★★";
+        blankStars = "";
+    }
 
-            pq.pop();
+    /*  cout<<"Name: "<< pq.top().name << endl;
+      cout<<"Rating: "<< stars + blankStars << endl;
+      cout<<"Number of Reviews: "<<pq.top().reviewCount << endl;
+      cout << " " << endl;*/
+
+    // std::sort(vect5.begin()->reviewCount, vect5.end()->reviewCount);
+    if (vect5.empty() == false) {
+        std::sort(vect5.begin(),
+                  vect5.end(),
+                  [](const Business &lhs, const Business &rhs) {
+                      return lhs.reviewCount > rhs.reviewCount;
+                  }
+        );
+    }
+
+    if (vect4.empty() == false) {
+        std::sort(vect4.begin(), vect4.end(), [](const Business &lhs, const Business &rhs) {
+            return lhs.reviewCount > rhs.reviewCount;
+        });
+    }
+
+
+    for (int i = 0; i < 10; i++) {
+        if (vect5[i].reviewCount != NULL) {
+            cout << "Name: " << vect5[i].name << endl;
+            cout << "Rating: " << vect5[i].rating << endl;
+            cout << "Number of Reviews: " << vect5[i].reviewCount << endl;
+            cout << " " << endl;
+        } else if (vect4[i].reviewCount != NULL) {
+            cout << "Name: " << vect4[i].name << endl;
+            cout << "Rating: " << vect4[i].rating << endl;
+            cout << "Number of Reviews: " << vect4[i].reviewCount << endl;
+            cout << " " << endl;
         }
 
+    }
+    //     }
+
+    //    pq.pop();
+
+
+}
 
     }while(run==true);
 

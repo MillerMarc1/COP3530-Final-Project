@@ -9,6 +9,7 @@
 #include <sstream>
 #include <vector>
 #include <queue>
+#include <chrono>
 using namespace std;
 //one of the catergories we have pre selected
 class Business {
@@ -29,7 +30,7 @@ public:
 class comparator{
 public:
     bool operator()(const Business& var1, const Business& var2){
-        return var1.rating < var2.rating;
+        return var1.name > var2.name;
     }
 };
 
@@ -143,7 +144,7 @@ int main() {
         int realRating=stoi(rating);
         count++;
 
-
+        auto start = std::chrono::high_resolution_clock::now();
         map<string, Business> graph;
         for (int i = 0; i < allBusinesses.size(); i++) {
             if (allBusinesses[i].city == input && allBusinesses[i].rating>=realRating) {
@@ -155,6 +156,8 @@ int main() {
 
             }
         }
+        auto stop = std::chrono::high_resolution_clock::now();
+
         vector<Business> myVect5;
         vector<Business> myVect4;
         vector<Business> myVect3;
@@ -226,11 +229,13 @@ int main() {
             );
 
         }
-        if(myVect5.size()==0||myVect4.size()==0||myVect3.size()==0||myVect2.size()==0||myVect1.size()==0){
+        if(myVect5.size()==0&&myVect4.size()==0&&myVect3.size()==0&&myVect2.size()==0&&myVect1.size()==0){
             cout<< "No results found. Please try again."<< endl;
         }
         else {
             cout << "Data Structure: Map" << endl;
+            auto time = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
+            cout << "Time taken: " << time << " microseconds." << endl;
         }
         int j =0;
         int k=0;
@@ -392,51 +397,46 @@ int main() {
 
 
 
-   /*     for(auto it =myGraph.begin();it!=myGraph.end();++it) {
-
-            string stars;
-            string blankStars;
-            if(it->second.rating==1){
-                stars = "★";
-                blankStars= "☆☆☆☆";
-            }
-            else if(it->second.rating==2){
-                stars = "★★";
-                blankStars = "☆☆☆";
-            }
-            if(it->second.rating==3){
-                stars = "★★★";
-                blankStars = "☆☆";
-            }
-            if(it->second.rating==4){
-                stars = "★★★★";
-                blankStars= "☆";
-            }
-            if(it->second.rating==5){
-                stars = "★★★★★";
-                blankStars="";
-            }
-
-            cout<< "Name: " << it->second.name << endl;
-            cout<<"Rating: "<<stars +blankStars<< endl;
-            cout<<"Number of Reviews: "<<it->second.rating << endl;
-            cout << " " << endl;
-
-        }
-        */
+        /*     for(auto it =myGraph.begin();it!=myGraph.end();++it) {
+                 string stars;
+                 string blankStars;
+                 if(it->second.rating==1){
+                     stars = "★";
+                     blankStars= "☆☆☆☆";
+                 }
+                 else if(it->second.rating==2){
+                     stars = "★★";
+                     blankStars = "☆☆☆";
+                 }
+                 if(it->second.rating==3){
+                     stars = "★★★";
+                     blankStars = "☆☆";
+                 }
+                 if(it->second.rating==4){
+                     stars = "★★★★";
+                     blankStars= "☆";
+                 }
+                 if(it->second.rating==5){
+                     stars = "★★★★★";
+                     blankStars="";
+                 }
+                 cout<< "Name: " << it->second.name << endl;
+                 cout<<"Rating: "<<stars +blankStars<< endl;
+                 cout<<"Number of Reviews: "<<it->second.rating << endl;
+                 cout << " " << endl;
+             }
+             */
 
 
         cout << endl << endl;
 
 
-
+        start = std::chrono::high_resolution_clock::now();
         priority_queue <Business, vector<Business>, comparator> pq;
         for (int i = 0; i < allBusinesses.size(); i++) {
             if (allBusinesses[i].city == input && allBusinesses[i].rating>=realRating) {
                 for(int j=0;j<allBusinesses[i].categories.size();j++){
                     if(allBusinesses[i].categories[j]==business){
-                        string businessName = allBusinesses[i].name;
-                        int businessRating = allBusinesses[i].rating;
                         /*   if(allBusinesses[i].rating==5){
                                vect5.push_back(allBusinesses[i]);
                            }
@@ -448,6 +448,7 @@ int main() {
                 }
             }
         }
+        stop = std::chrono::high_resolution_clock::now();
 
         vector<Business> vect5;
         vector<Business> vect4;
@@ -457,6 +458,8 @@ int main() {
         int numberOfBusinesses = 0;
         if(pq.empty()!=true) {
             cout << "Data Structure: Priority Queue" << endl;
+            auto time = std::chrono::duration_cast<std::chrono::microseconds>(stop - start).count();
+            cout << "Time taken: " << time << " microseconds." << endl;
 
             while (pq.empty() == false /*&& numberOfBusinesses<25*/) {
 /*        string stars;
@@ -549,6 +552,7 @@ int main() {
         l = 0;
         m=0;
         n=0;
+        numberOfBusinesses=25;
 
         for (int i = 0; i < numberOfBusinesses; i++) {
 
